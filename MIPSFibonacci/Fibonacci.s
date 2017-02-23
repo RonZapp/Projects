@@ -6,31 +6,31 @@
  	.text
 	.globl	main
 main:
-	addi 	$sp, $sp, -4	# Allocate stack space.
+	addi	$sp, $sp, -4	# Allocate stack space.
 	sw		$ra, 0($sp)		# Save the return address
 
-	la 		$a0, i_msg		# Load input message
-	jal 	rd_int			# Jump to input function
+	la		$a0, i_msg		# Load input message
+	jal		rd_int			# Jump to input function
 
-	addi 	$a0, $v0, 0		# Moves input into argument 0 for fibonacci function
+	addi	$a0, $v0, 0		# Moves input into argument 0 for fibonacci function
 	li		$s7, 1			# Save 1 to s7 for comparisons
-	jal		fib 			# Jump to fibonacci function
+	jal		fib				# Jump to fibonacci function
 
-	la 		$a0, o_msg		# Load output message
-	addi 	$a1, $v0, 0 	# Load solution from fibonacci function
+	la		$a0, o_msg		# Load output message
+	addi	$a1, $v0, 0		# Load solution from fibonacci function
 	jal		pr_int			# Jump to output function
 
-	# Restore the values from the stack, and release the stack space.
+		# Restore the values from the stack, and release the stack space.
 	lw		$ra, 0($sp)		# Retrieve return address
-	addu	$sp, $sp, 0		# Free stack space.
+	addi	$sp, $sp, 0		# Free stack space.
 
-    # Exit system call:  SPIM
-    li    	$v0, 10
-    syscall
+		# Exit system call:  SPIM
+	li		$v0, 10
+	syscall
 
 
 
-    	# Recursive function to calc fib numbers
+		# Recursive function to calc fib numbers
     	# Pushes state onto stack, then pops state back off if n==0
     	# If n==1 jumps to eq1 and has that function pop state off stack
     	# If n>1 jumps to sm fucntion
