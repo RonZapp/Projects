@@ -7,25 +7,25 @@
 	.globl	main
 main:
 	addi	$sp, $sp, -4	# Allocate stack space.
-	sw		$ra, 0($sp)		# Save the return address
+	sw	$ra, 0($sp)	# Save the return address
 
-	la		$a0, i_msg		# Load input message
-	jal		rd_int			# Jump to input function
+	la	$a0, i_msg	# Load input message
+	jal	rd_int		# Jump to input function
 
-	addi	$a0, $v0, 0		# Moves input into argument 0 for fibonacci function
-	li		$s7, 1			# Save 1 to s7 for comparisons
-	jal		fib				# Jump to fibonacci function
+	addi	$a0, $v0, 0	# Moves input into argument 0 for fibonacci function
+	li	$s7, 1		# Save 1 to s7 for comparisons
+	jal	fib		# Jump to fibonacci function
 
-	la		$a0, o_msg		# Load output message
-	addi	$a1, $v0, 0		# Load solution from fibonacci function
-	jal		pr_int			# Jump to output function
+	la	$a0, o_msg	# Load output message
+	addi	$a1, $v0, 0	# Load solution from fibonacci function
+	jal	pr_int		# Jump to output function
 
 		# Restore the values from the stack, and release the stack space.
-	lw		$ra, 0($sp)		# Retrieve return address
-	addi	$sp, $sp, 0		# Free stack space.
+	lw	$ra, 0($sp)	# Retrieve return address
+	addi	$sp, $sp, 0	# Free stack space.
 
 		# Exit system call:  SPIM
-	li		$v0, 10
+	li	$v0, 10
 	syscall
 
 
