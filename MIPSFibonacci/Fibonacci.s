@@ -30,16 +30,16 @@ main:	addi	$sp, $sp, -4	# Allocate stack space.
 
 
 
-	# Recursive function to calc fib numbers
-	# Pushes state onto stack, then pops state back off if n==0
-	# If n==1 jumps to eq1 and has that function pop state off stack
-	# If n>1 jumps to sm fucntion
+		# Recursive function to calc fib numbers
+		# Pushes state onto stack, then pops state back off if n==0
+		# If n==1 jumps to eq1 and has that function pop state off stack
+		# If n>1 jumps to sm fucntion
 fib:	addi 	$sp, $sp, -12 	# Allocate stack space
 	sw	$ra, 8($sp)	# Save ra
 	sw	$s0, 4($sp)	# Save fib
 	sw	$a0, 0($sp)	# Save n
 
-	# Jump to eq1 if n == 1, jump to sm if n > 1
+		# Jump to eq1 if n == 1, jump to sm if n > 1
 	beq	$a0, $s7, eq1	# If n == 1 jump to eq1
 	slti	$t0, $a0, 1	# Set to 1 if a0 < 1
 	beq	$t0, $zero, sm	# If n != 0, go to sm
@@ -52,7 +52,7 @@ fib:	addi 	$sp, $sp, -12 	# Allocate stack space
 	jr	$ra		# Return to function call
 
 
-	# Returns 1, pops state from stack
+		# Returns 1, pops state from stack
 eq1:	addi	$v0, $zero, 1	# Return 1
 	lw	$a0, 0($sp)	# Pop n
 	lw	$s0, 4($sp)	# Pop fib
@@ -96,8 +96,8 @@ rd_int:	addi	$sp, $sp, -4	# Allocate space on stack
 
 
 
-	# Function to print a message and an int
-	# Message should be in $a0, int should be in $a1
+		# Function to print a message and an int
+		# Message should be in $a0, int should be in $a1
 pr_int: addi	$sp, $sp, -4	# Allocate space on stack
 	sw	$ra, 0($sp)	# Store return address
 
@@ -112,7 +112,7 @@ pr_int: addi	$sp, $sp, -4	# Allocate space on stack
 	la	$a0, newln	# Make newln avail to syscall
 	syscall			# Prints newln
 
-	# Restore the values from the stack, and release the stack space.
+		# Restore the values from the stack, and release the stack space.
 	lw	$ra, 0($sp)	# Retrieve return address
 	addu	$sp, $sp, 4	# Free stack space.
 	jr	$ra		# Return 
