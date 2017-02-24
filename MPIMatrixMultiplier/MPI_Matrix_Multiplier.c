@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
 }
 
 	/*
-	* This function generates a MatrixA and a Matrix B and then sends the contents of them
+	* This function generates a Matrix A and a Matrix B and then sends the contents of them
 	* throughout the processes
 	*/
 void Matrix_Generator(int rank, int size) {
